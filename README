@@ -1,0 +1,96 @@
+--------------------------------------------
+  -Parts, there are now three top level scripts.
+    all scripts run for both 1.778 (16:9), and 1.333 (4:3) aspect ratios)
+doStory.sh   : story board animation
+doMesh.sh    : creates 24...48x24..48 sequences
+doAnnotate.sh: creates longer seamless animations
+  -combine the 9 styoryBoard parts (with repeats into one sequence)
+     as in 1,1,1,2,3,3,3,4,5,5,5,6,7,7,7,8,9,9,9
+  -combines all mesh animations for one constant outter frequency
+     and adds freq pair anotation to bottom of image.
+  
+----- 2007-10-06 re-rendering for 16:9
+
+ -See BUILD file for instructions  to re-RENDER
+
+Blogged it:
+http://sologlobe.org/daniel/2007/10/bucky-moire-revisited-wide-169.html
+
+Committed it:
+  svn checkout https://snookr.googlecode.com/svn/trunk/buckyMoire buckyMoire --username daniel.lauzon
+ --Notes
+When I tried to re-render my Bucky Moire project, I found that the MPEG files were making PowerDirector crash. Investigating, I decided to re-render in 16:9, with better aspect-ratio management.
+
+- so rendering in 720x480, with an explicit aspect ratio in pov files:
+camera{ .. right x*1.778 ..} does the trick (implicitly 4:3 is the default.)
+-That makes the png picture distorted (when viewing with sqaure pixels.)
+- I also removed the -f dvd flag from the ffmpeg line
+- old vs new ffmpeg, old is the one that I built in the dome directory vs the one from rpmforge under centos5 old: -b 9000 ; new: -b 9000000
+- so the MPEG file needs to be told about the aspect ratio: e.g.
+/home/daniel/dome/ffmpeg/ffmpeg/ffmpeg -r 30 -i work/buckyMoireF2427-%03d.png -aspect 1.778 -b 9000 -y oldffmpeg-nodvd-aspect169-nonsquare.mpg
+
+
+Making the animation myself: PD6 seems to make strange border transitions
+I waill attempt to unroll all animation to compare:
+
+-------------------------------------------
+Original SrotyBoard idea.
+
+Full Storyboard: 800x600
+ + justMoireGlassCam0.9.sh  120 frames - rotate outer - F9081 CcSs0.005
+    opteron 2005-11-19 01:25 : 22682.714s
+    ./scripts/justMoireGlassCam0.9.sh -n 120
+
+ + zoomOutGlass.sh 120 frames - rotate outer - F9081 CcSs0.005
+    euler 2005-11-19 02:46 : 16718.305s
+    ./scripts/zoomOutGlass.sh -n 120
+
+ + justMoireGlassCam1.4.sh  120 frames - rotate outer - F9081 CcSs0.005
+    boole 2005-11-19 03:22 : 14906.815s
+    ./scripts/justMoireGlassCam1.4.sh -n 120
+
+ - justMoireF9081-C4Cam1.4 - rotate outer
+    ./scripts/justMoireC4.sh -n 120 -F 90 -f 81 -C 0.005 -c 0.005 -S 0.005 -s 0.005
+
+ - justMoireF4527-C4Cam1.4 - rotate outer (SsCc 0.1)
+    ./scripts/justMoireC4.sh -n 120 -F 45 -f 27 -C 0.01 -c 0.01 -S 0.01 -s 0.01
+
+ - zoomOutC4 - Cam 1.4-2.5 stop outer rotation
+    outer rotate 1-(1-clock)^2 = 2*clock-clock*clock
+    ./scripts/zoomOutC4.sh -n 120 -F 45 -f 27 -C 0.01 -c 0.01 -S 0.01 -s 0.01
+
+ - fullerMoireC4 Cam 2.5 no outer rotation
+    ./scripts/fullerMoire.sh -n 120 -F 45 -f 27 -C 0.01 -c 0.01 -S 0.01 -s 0.01
+  
+
+fill in animation:
+  zoomOut : redo with cam->1.4 + outer rotate - 7 hours 
+  or go from 1.2 -> 1.4 starting outer rotation
+
+  justMoireC4 -> at 1.4 F9081
+  justMoireC4 -> at 1.4 F4527 CcSs 0.01
+  zoomOutC4 Cam 1.4->2.5 ; stop rotation
+  
+ 
+--- setup notes ---
+./dome_4_80/dome -f15 -sb dome15.pov
+./dome_4_80/dome -f18 -sb dome18.pov
+
+#add - semi-colons ...
+./povray-3.6/povray +Lpovray-3.6/include/ +Idome-both.pov +Odome-both.png +FN +W800 +H600 +V -D +X
+display dome-both.png
+
+
+72 degrees should do it for bucky balls
+
+Animation options
+
+  Kn.n    = set frame clock to n.n
+  KFIn    = set initial frame number to n
+  KFFn    = set final frame number to n
+  KIn.n   = set initial clock value to n.n
+  KFn.n   = set final clock value to n.n
+  SFn|0.n = start subset at frame n | start at n percent in sequence
+  EFn|0.n = end subset at frame n | end at n percent in sequence
+  KC      = calculate clock value for cyclic animation
+
