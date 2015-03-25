@@ -1,5 +1,9 @@
 ---2015-03-16: Docker Notes
-  $(/usr/local/bin/boot2docker shellinit)
+$(/usr/local/bin/boot2docker shellinit)
+docker build -t daneroo/bucky-moire ./
+docker run --name bucky-moire --rm -i -t daneroo/bucky-moire bash
+docker exec -it bucky-moire bash
+
   # start the generic docker image
   docker run --name ubuntu_bash --rm -i -t ubuntu bash
   # to get a second shell
