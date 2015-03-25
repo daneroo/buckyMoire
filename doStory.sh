@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ffmpegExec=./ffmpeg/ffmpeg/ffmpeg
 

@@ -1,3 +1,34 @@
+---2015-03-16: Docker Notes
+  $(/usr/local/bin/boot2docker shellinit)
+  # start the generic docker image
+  docker run --name ubuntu_bash --rm -i -t ubuntu bash
+  # to get a second shell
+  docker exec -it ubuntu_bash bash
+
+  #once inside:
+  apt-get update
+  apt-get -y install rsync ssh build-essential bc libav-tools
+  mkdir /buckyMoire
+  rsync -av --progress daniel@192.168.3.111:Code/iMetrical/buckyMoire/ /buckyMoire/
+
+Dome: 
+http://www.antiprism.com/other/dome/
+https://github.com/antiprism/dome-4.80ar
+#wget http://www.antiprism.com/other/dome/dome-4.80ar.02.tar.gz
+tar xzvf distr/dome-4.80ar.02.tar.gz
+cd dome-4.80ar.02
+./configure
+make
+make install
+
+ffmpeg:
+apt-get install libav-tools
+
+povray: (old)
+tar xjvf distr/povray-3.6-bin.tar.bz2
+
+---End of docker notes
+
 This is how to reproduce all the renders.
 
   svn checkout https://snookr.googlecode.com/svn/trunk/buckyMoire buckyMoire --username daniel.lauzon
