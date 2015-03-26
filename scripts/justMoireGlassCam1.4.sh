@@ -24,7 +24,8 @@ height=480;
 aspectRatio=1.778;
 numFrames=120;
 
-DomeExec=./dome_4_80/dome
+#DomeExec=./dome_4_80/dome
+DomeExec=/usr/local/bin/dome
 POVHome=./povray-3.6
 POVExec=$POVHome/povray
 ffmpegExec=./ffmpeg/ffmpeg/ffmpeg

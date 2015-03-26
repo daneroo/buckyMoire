@@ -9,7 +9,7 @@ FROM ubuntu:14.04
 # TODO remove rsync ssh, when volumes are mapped
 RUN \
   apt-get update && \
-  DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential bc libav-tools rsync ssh
+  DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential bc  imagemagick libav-tools
 
 # Set timezone 
 RUN \ 

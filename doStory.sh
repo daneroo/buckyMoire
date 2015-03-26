@@ -1,6 +1,7 @@
 #!/bin/bash
 
-ffmpegExec=./ffmpeg/ffmpeg/ffmpeg
+#ffmpegExec=./ffmpeg/ffmpeg/ffmpeg
+ffmpegExec=/usr/bin/avconv
 
 function logStderr { #echo to stderr.
     echo $1 1>&2
@@ -52,7 +53,7 @@ function doStory {
     a=$1;
 
     local numFrames=120;
-    commonargs="-n ${numFrames} -w 720 -h 480 -a $a";
+    commonargs="-n ${numFrames} -w 1280 -h 720 -a $a";
 
     # CLEANUP
     rm -rf work;

@@ -190,7 +190,7 @@ makeDomeInc $outerFrequency $outerSphereRadius $outerCylinderRadius;
 makeDomeInc $innerFrequency $innerSphereRadius $innerCylinderRadius;
 makePov;
 # do not do thums and still anymore: aspect ratios make images distorted..
-#thumbAndFirst;
+thumbAndFirst;
 generate;
 
 

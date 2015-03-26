@@ -1,7 +1,7 @@
 ---2015-03-16: Docker Notes
 $(/usr/local/bin/boot2docker shellinit)
 docker build -t daneroo/bucky-moire ./
-docker run --name bucky-moire --rm -i -v ~/Code/iMetrical/buckyMoire/output:/buckyMoire/output -t daneroo/bucky-moire bash
+docker run --name bucky-moire --rm -i -v `pwd`/output:/buckyMoire/output -t daneroo/bucky-moire bash
 docker exec -it bucky-moire bash
 
   # start the generic docker image

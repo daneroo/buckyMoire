@@ -1,6 +1,7 @@
 #!/bin/bash
 
-ffmpegExec=./ffmpeg/ffmpeg/ffmpeg
+#ffmpegExec=./ffmpeg/ffmpeg/ffmpeg
+ffmpegExec=/usr/bin/avconv
 
 function logStderr { #echo to stderr.
     echo $1 1>&2
@@ -23,7 +24,7 @@ function doStory {
     for i in `seq -f %02g 1 9`; do
         echo "story a/r: $a part $i";
         mkdir -p work/p$i;
-        $ffmpegExec -i renders/story-$a/part$i-*.mpg work/p$i/frame-%04d.png
+        $ffmpegExec -i output/story-$a/part$i-*.mpg work/p$i/frame-%04d.png
     done
 
     local currentFrame=0;
@@ -59,7 +60,7 @@ function doMesh {
         echo "  doMesh: $of $if $a"
         wkdir="work/F$of$if";
         mkdir -p $wkdir
-        $ffmpegExec -i renders/mesh-$a/buckyMoireF$of$if-*.mpg $wkdir/frame-%04d.png
+        $ffmpegExec -i output/mesh-$a/buckyMoireF$of$if-*.mpg $wkdir/frame-%04d.png
 
         for i in $wkdir/*.png; do
             file=`printf "work/all/all-%04d.png" $currentFrame`;
@@ -75,7 +76,8 @@ function doMesh {
 }
 
 
-for a in 1.778 1.333 ; do
+# for a in 1.778 1.333 ; do
+for a in 1.778 ; do
 
     mkdir -p output
     doStory $a;
