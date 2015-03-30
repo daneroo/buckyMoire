@@ -1,6 +1,6 @@
 #
 # BuckyMoire Dockerfile
-#
+# TODO: Consider starting from buildpack-deps (:jessie)
 
 # Pull base image.
 FROM ubuntu:14.04

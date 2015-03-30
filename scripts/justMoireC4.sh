@@ -29,7 +29,8 @@ numFrames=120;
 DomeExec=/usr/local/bin/dome
 POVHome=./povray-3.6
 POVExec=$POVHome/povray
-ffmpegExec=./ffmpeg/ffmpeg/ffmpeg
+#ffmpegExec=./ffmpeg/ffmpeg/ffmpeg
+ffmpegExec=/usr/bin/avconv
 workDir=work/C4
 
 function logStderr { #echo to stderr.

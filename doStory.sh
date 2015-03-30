@@ -103,7 +103,7 @@ function doStory {
 
 
 #for a in 1.333 1.778 ; do
-for a in 1.778 1.333 ; do
+for a in 1.778 ; do
     mkdir -p output/story-$a
     doStory $a;
 done
