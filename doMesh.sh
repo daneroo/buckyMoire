@@ -24,10 +24,8 @@ function doMesh {
 #for a in 1.778 1.333 ; do
 for a in 1.778 ; do
     mkdir -p output/mesh-$a
-#    for o in 24 27 30 33 36 39 42 45 48; do
-#    for i in 24 27 30 33 36 39 42 45 48; do
-    for o in 24; do
-    for i in 27 30; do
+   for o in 24 27 30 33 36 39 42 45 48; do
+   for i in 24 27 30 33 36 39 42 45 48; do
 	    doMesh $a $o $i;
 	done
     done
