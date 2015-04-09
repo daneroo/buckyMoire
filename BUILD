@@ -1,3 +1,4 @@
+Todo:
 https://wiki.libav.org/Encoding/h264
 losseless: -qp 0
 avconv -r 30 -i work/glassCam0.9/glassCam0.9-F9081-1.778-%03d.png -aspect 1.778 -b 9000000 -y output/coco.mpg
